@@ -11,6 +11,7 @@
 ## 🎯 Project Overview
 
 Velirion (VLR) is a comprehensive DeFi ecosystem featuring:
+
 - **ERC-20 Token** on Ethereum with burning mechanisms
 - **SPL Token** on Solana with automatic 0.5% burn
 - **10-Phase Presale** with antibot protection and vesting
@@ -19,6 +20,7 @@ Velirion (VLR) is a comprehensive DeFi ecosystem featuring:
 - **DAO Governance** with burn voting and treasury management
 
 ### Token Economics
+
 - **Total Supply**: 100,000,000 VLR
 - **Networks**: Ethereum (ERC-20) + Solana (SPL)
 - **Distribution**: Presale 30%, Staking 20%, Marketing 15%, Team 15%, Liquidity 10%, Referral 5%, DAO 5%
@@ -28,13 +30,14 @@ Velirion (VLR) is a comprehensive DeFi ecosystem featuring:
 ## 📚 Documentation
 
 ### Quick Access
-| Document | Purpose | Audience |
-|----------|---------|----------|
-| **[📖 Documentation Index](DOCUMENTATION_INDEX.md)** | Complete guide to all docs | Everyone |
-| **[🚀 Quick Start Guide](QUICK_START_GUIDE.md)** | Get started in 15 minutes | Developers |
-| **[📋 Implementation Guide](VELIRION_IMPLEMENTATION_GUIDE.md)** | Full technical specs | Developers |
-| **[📝 Contract Templates](CONTRACT_TEMPLATES.md)** | Ready-to-use code | Developers |
-| **[📊 Project Tracker](PROJECT_TRACKER.md)** | Progress tracking | Project Managers |
+
+| Document                                                        | Purpose                    | Audience         |
+| --------------------------------------------------------------- | -------------------------- | ---------------- |
+| **[📖 Documentation Index](DOCUMENTATION_INDEX.md)**            | Complete guide to all docs | Everyone         |
+| **[🚀 Quick Start Guide](QUICK_START_GUIDE.md)**                | Get started in 15 minutes  | Developers       |
+| **[📋 Implementation Guide](VELIRION_IMPLEMENTATION_GUIDE.md)** | Full technical specs       | Developers       |
+| **[📝 Contract Templates](CONTRACT_TEMPLATES.md)**              | Ready-to-use code          | Developers       |
+| **[📊 Project Tracker](PROJECT_TRACKER.md)**                    | Progress tracking          | Project Managers |
 
 **👉 Start here**: [DOCUMENTATION_INDEX.md](DOCUMENTATION_INDEX.md)
 
@@ -43,6 +46,7 @@ Velirion (VLR) is a comprehensive DeFi ecosystem featuring:
 ## 🚀 Quick Start
 
 ### Prerequisites
+
 ```bash
 Node.js >= 18.x
 npm >= 9.x
@@ -50,6 +54,7 @@ Git
 ```
 
 ### Installation
+
 ```bash
 # Clone and install
 cd velirion-sc
@@ -67,6 +72,7 @@ npx hardhat test
 ```
 
 ### Deploy to Testnet
+
 ```bash
 # Deploy VLR Token
 npx hardhat run scripts/01_deploy_token.ts --network sepolia
@@ -115,23 +121,10 @@ velirion-sc/
 
 ---
 
-## 🎯 Development Roadmap
-
-| Phase | Milestone | Duration | Budget | Status |
-|-------|-----------|----------|--------|--------|
-| 1 | Token + Core Logic | 5-6 days | $120 | ⏳ Pending |
-| 2 | Presale System | 5 days | $120 | ⏳ Pending |
-| 3 | Referral System | 4 days | $100 | ⏳ Pending |
-| **Launch** | **Presale Goes Live** | **Day 15** | | |
-| 4 | Staking Module | 7-8 days | $150 | ⏳ Pending |
-| 5 | DAO + Integration | 6-7 days | $110 | ⏳ Pending |
-| **Total** | | **27-31 days** | **$600** | |
-
----
-
 ## 🔧 Tech Stack
 
 ### Ethereum
+
 - **Solidity**: 0.8.20
 - **Framework**: Hardhat 3.x
 - **Libraries**: OpenZeppelin Contracts 5.x
@@ -139,6 +132,7 @@ velirion-sc/
 - **Network**: Ethereum Mainnet & Sepolia Testnet
 
 ### Solana
+
 - **Language**: Rust 1.70+
 - **Framework**: Anchor 0.28+
 - **Token**: SPL Token Standard
@@ -169,6 +163,7 @@ REPORT_GAS=true npx hardhat test
 ## 🔐 Security
 
 ### Best Practices
+
 - ✅ OpenZeppelin audited contracts
 - ✅ ReentrancyGuard on external functions
 - ✅ Pausable for emergency stops
@@ -177,39 +172,45 @@ REPORT_GAS=true npx hardhat test
 - ✅ Events for all state changes
 
 ### Auditing
+
 - Internal code review
 - Automated testing (≥90% coverage)
 - External audit (recommended before mainnet)
 
 ---
 
-## 📊 Key Features
+## Key Features
 
-### 🎫 Presale System
+### Presale System
+
 - 10 progressive pricing phases ($0.005 - $0.015)
 - Multi-token payments (ETH, USDT, USDC)
 - Antibot protection (tx limits, wallet limits, delays)
 - Vesting: 40% at TGE, 30% monthly
 
-### 🤝 Referral System
+### Referral System
+
 - 4 levels based on referral count (0, 10+, 25+, 50+)
 - Purchase bonuses: 5% to 12%
 - Staking bonuses: 2% to 5%
 - NFT rewards for top performers
 
-### 💰 Staking Module
+### Staking Module
+
 - **Flexible**: 6% APR, no lock, 100 VLR min
 - **Medium**: 12-15% APR, 90-180 days, 1K VLR min
 - **Long**: 20-22% APR, 1 year, 5K VLR min
 - **Elite**: 30% APR, 2 years, 250K VLR min
 
-### 🔥 Burning Mechanisms
+### Burning Mechanisms
+
 - Unsold presale tokens burned
 - 0.5% burn per Solana transaction
 - Monthly DAO buyback & burn
 - Quarterly community burn votes
 
-### 🏛️ DAO Governance
+### DAO Governance
+
 - Proposal creation & voting
 - Burn amount decisions
 - Treasury management
@@ -220,55 +221,47 @@ REPORT_GAS=true npx hardhat test
 ## 🌐 Deployment
 
 ### Testnet (Sepolia)
+
 ```bash
 npx hardhat run scripts/01_deploy_token.ts --network sepolia
 npx hardhat verify --network sepolia <ADDRESS>
 ```
 
 ### Mainnet (Ethereum)
+
 ```bash
 npx hardhat run scripts/01_deploy_token.ts --network mainnet
 npx hardhat verify --network mainnet <ADDRESS>
 ```
 
-**⚠️ Warning**: Always test thoroughly on testnet before mainnet deployment!
-
 ---
 
-## 📞 Support & Resources
-
 ### Documentation
+
 - [Hardhat Docs](https://hardhat.org/docs)
 - [OpenZeppelin](https://docs.openzeppelin.com/)
 - [Solidity](https://docs.soliditylang.org/)
 - [Ethers.js](https://docs.ethers.org/)
 
 ### Tools
+
 - [Ethereum Testnet Faucets](https://sepoliafaucet.com/)
 - [Etherscan](https://etherscan.io/)
 - [Gnosis Safe](https://app.safe.global/)
 
 ---
 
-## 📄 License
+## License
 
 MIT License - See [LICENSE](LICENSE) file for details
 
 ---
 
-## 🙏 Acknowledgments
+# Acknowledgments
 
 - OpenZeppelin for secure contract libraries
 - Hardhat for development framework
 - Ethereum & Solana communities
-
----
-
-## 📈 Current Status
-
-**Project Status**: 🔴 Setup Phase  
-**Latest Version**: 1.0.0  
-**Last Updated**: October 2025
 
 ---
 
