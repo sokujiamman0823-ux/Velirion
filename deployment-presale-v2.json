@@ -1,0 +1,23 @@
+{
+  "network": "unknown",
+  "chainId": 31337,
+  "presaleAddress": "0xb82A4926BCbE123Cf5b585Ac0844DC53703c62B9",
+  "vlrToken": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+  "usdtToken": "0x17eC417E905D5084375199BC95908f194147fee3",
+  "usdcToken": "0x8bAF11Bb2f5C35D81fD21Cd40Eae0c205113cbA1",
+  "initialEthPrice": "2000.0",
+  "presaleAllocation": "35000000.0",
+  "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+  "timestamp": "2025-10-21T07:31:19.466Z",
+  "specification": {
+    "totalPhases": 10,
+    "tokensPerPhase": "3,000,000 VLR",
+    "totalPresale": "30,000,000 VLR",
+    "priceRange": "$0.005 - $0.015",
+    "maxPerTransaction": "50,000 VLR",
+    "maxPerWallet": "500,000 VLR",
+    "purchaseDelay": "5 minutes",
+    "vesting": "40% TGE + 30% monthly × 2",
+    "referralBonus": "5%"
+  }
+}

@@ -1,6 +1,7 @@
 # Velirion (VLR) Smart Contract - Implementation Guide
 
 ## Table of Contents
+
 1. [Project Overview](#project-overview)
 2. [Prerequisites & Setup](#prerequisites--setup)
 3. [Smart Contract Architecture](#smart-contract-architecture)
@@ -14,6 +15,7 @@
 ## Project Overview
 
 ### Token Specifications
+
 - **Name**: Velirion (VLR)
 - **Networks**: Ethereum (ERC-20) + Solana (SPL)
 - **Total Supply**: 100,000,000 VLR
@@ -22,32 +24,33 @@
 
 ### Token Distribution
 
-| Category | % | Amount (VLR) |
-|----------|---|--------------|
-| Presale | 30% | 30,000,000 |
-| Staking & Bonuses | 20% | 20,000,000 |
-| Marketing | 15% | 15,000,000 |
-| Team | 15% | 15,000,000 |
-| Liquidity | 10% | 10,000,000 |
-| Referral | 5% | 5,000,000 |
-| DAO Treasury | 5% | 5,000,000 |
+| Category          | %   | Amount (VLR) |
+| ----------------- | --- | ------------ |
+| Presale           | 30% | 30,000,000   |
+| Staking & Bonuses | 20% | 20,000,000   |
+| Marketing         | 15% | 15,000,000   |
+| Team              | 15% | 15,000,000   |
+| Liquidity         | 10% | 10,000,000   |
+| Referral          | 5%  | 5,000,000    |
+| DAO Treasury      | 5%  | 5,000,000    |
 
 ### Development Timeline
 
-| Milestone | Duration | Cost | Status |
-|-----------|----------|------|--------|
-| M1: Token + Core | 5-6 days | $120 | ⏳ |
-| M2: Presale | 5 days | $120 | ⏳ |
-| M3: Referral | 4 days | $100 | ⏳ |
-| M4: Staking | 7-8 days | $150 | ⏳ |
-| M5: DAO + Integration | 6-7 days | $110 | ⏳ |
-| **Total** | **27-31 days** | **$600** | |
+| Milestone             | Duration       | Cost     | Status |
+| --------------------- | -------------- | -------- | ------ |
+| M1: Token + Core      | 5-6 days       | $120     | ⏳     |
+| M2: Presale           | 5 days         | $120     | ⏳     |
+| M3: Referral          | 4 days         | $100     | ⏳     |
+| M4: Staking           | 7-8 days       | $150     | ⏳     |
+| M5: DAO + Integration | 6-7 days       | $110     | ⏳     |
+| **Total**             | **27-31 days** | **$600** |        |
 
 ---
 
 ## Prerequisites & Setup
 
 ### Required Tools
+
 ```bash
 # Core Development
 Node.js >= 18.x
@@ -65,6 +68,7 @@ Mocha/Chai
 ### Environment Setup
 
 #### 1. Initialize Project
+
 ```bash
 cd velirion-sc
 npm install
@@ -75,7 +79,9 @@ npm install @chainlink/contracts  # For price oracles
 ```
 
 #### 2. Configure Environment Variables
+
 Create `.env` file:
+
 ```env
 # Ethereum Networks
 ETHEREUM_RPC_URL=https://eth-mainnet.g.alchemy.com/v2/YOUR_KEY
@@ -105,6 +111,7 @@ DAO_CONTRACT=
 ```
 
 #### 3. Update Hardhat Config
+
 ```typescript
 import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
@@ -146,6 +153,7 @@ export default config;
 ## Smart Contract Architecture
 
 ### Contract Structure
+
 ```
 contracts/
 ├── core/
@@ -167,6 +175,7 @@ contracts/
 ### Key Features by Contract
 
 #### VelirionToken.sol
+
 - ✅ ERC-20 standard implementation
 - ✅ Burnable (manual + automatic)
 - ✅ Pausable for emergencies
@@ -174,6 +183,7 @@ contracts/
 - ✅ Owner controls
 
 #### VelirionPresale.sol
+
 - ✅ 10 phases with progressive pricing
 - ✅ Time restrictions (90+30 days)
 - ✅ Multi-token payments (ETH, USDT, USDC)
@@ -182,6 +192,7 @@ contracts/
 - ✅ Vesting schedule (40% initial, 30% monthly)
 
 #### VelirionReferral.sol
+
 - ✅ 4-level referral system
 - ✅ Purchase bonuses (5%-12%)
 - ✅ Staking reward bonuses (2%-5%)
@@ -189,6 +200,7 @@ contracts/
 - ✅ Direct referral tracking
 
 #### VelirionStaking.sol
+
 - ✅ 4 staking tiers (Flexible, Medium, Long, Elite)
 - ✅ APR: 6%-30%
 - ✅ Lock periods: None to 2 years
@@ -197,6 +209,7 @@ contracts/
 - ✅ Manual claim system
 
 #### VelirionDAO.sol
+
 - ✅ Burn voting mechanism
 - ✅ Treasury management
 - ✅ Multisig integration (Gnosis Safe)
@@ -210,6 +223,7 @@ contracts/
 ## Milestone 1: Token + Core Logic (Days 1-6)
 
 ### Deliverables
+
 - [x] Deploy ERC-20 token
 - [x] Deploy Solana SPL token
 - [x] Implement burning functions
@@ -219,6 +233,7 @@ contracts/
 ### Implementation
 
 #### VelirionToken.sol (Core Contract)
+
 ```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
@@ -230,34 +245,34 @@ import "@openzeppelin/contracts/security/Pausable.sol";
 
 contract VelirionToken is ERC20, ERC20Burnable, Ownable, Pausable {
     uint256 public constant INITIAL_SUPPLY = 100_000_000 * 10**18;
-    
+
     mapping(address => bool) public isAllocator;
     mapping(string => uint256) public allocationTracking;
-    
+
     event TokensAllocated(string category, address to, uint256 amount);
     event UnsoldBurned(uint256 amount);
-    
+
     constructor() ERC20("Velirion", "VLR") {
         _mint(msg.sender, INITIAL_SUPPLY);
     }
-    
-    function allocate(string memory category, address to, uint256 amount) 
-        external onlyOwner 
+
+    function allocate(string memory category, address to, uint256 amount)
+        external onlyOwner
     {
         require(to != address(0), "Invalid address");
         allocationTracking[category] += amount;
         _transfer(owner(), to, amount);
         emit TokensAllocated(category, to, amount);
     }
-    
+
     function burnUnsold(uint256 amount) external onlyOwner {
         _burn(owner(), amount);
         emit UnsoldBurned(amount);
     }
-    
+
     function pause() external onlyOwner { _pause(); }
     function unpause() external onlyOwner { _unpause(); }
-    
+
     function _beforeTokenTransfer(address from, address to, uint256 amount)
         internal override whenNotPaused
     {
@@ -267,6 +282,7 @@ contract VelirionToken is ERC20, ERC20Burnable, Ownable, Pausable {
 ```
 
 #### Deployment Script
+
 ```typescript
 // scripts/01_deploy_token.ts
 import { ethers } from "hardhat";
@@ -274,15 +290,16 @@ import { ethers } from "hardhat";
 async function main() {
   const VLR = await ethers.deployContract("VelirionToken");
   await VLR.waitForDeployment();
-  
+
   console.log("✅ VelirionToken deployed:", await VLR.getAddress());
-  console.log("📊 Total Supply:", ethers.formatEther(await VLR.totalSupply()));
+  console.log("Total Supply:", ethers.formatEther(await VLR.totalSupply()));
 }
 
 main().catch(console.error);
 ```
 
 #### Testing
+
 ```typescript
 // test/01_Token.test.ts
 import { expect } from "chai";
@@ -290,28 +307,26 @@ import { ethers } from "hardhat";
 
 describe("VelirionToken", () => {
   let token, owner, addr1;
-  
+
   beforeEach(async () => {
     [owner, addr1] = await ethers.getSigners();
     token = await ethers.deployContract("VelirionToken");
   });
-  
+
   it("Should deploy with correct supply", async () => {
     expect(await token.totalSupply()).to.equal(ethers.parseEther("100000000"));
   });
-  
+
   it("Should allocate tokens", async () => {
     const amount = ethers.parseEther("1000000");
     await token.allocate("presale", addr1.address, amount);
     expect(await token.balanceOf(addr1.address)).to.equal(amount);
   });
-  
+
   it("Should burn tokens", async () => {
     const burnAmt = ethers.parseEther("1000000");
     await token.burn(burnAmt);
-    expect(await token.totalSupply()).to.equal(
-      ethers.parseEther("99000000")
-    );
+    expect(await token.totalSupply()).to.equal(ethers.parseEther("99000000"));
   });
 });
 ```
@@ -321,6 +336,7 @@ describe("VelirionToken", () => {
 ## Milestone 2: Presale System (Days 7-11)
 
 ### Key Features
+
 - 10 phases with automatic progression
 - Price range: $0.005 - $0.015 per VLR
 - Max per tx: 50,000 VLR
@@ -330,21 +346,22 @@ describe("VelirionToken", () => {
 
 ### Presale Phase Pricing
 
-| Phase | Price (USD) | Tokens Available | Target Raise |
-|-------|-------------|------------------|--------------|
-| 1 | $0.005 | 3,000,000 | $15,000 |
-| 2 | $0.006 | 3,000,000 | $18,000 |
-| 3 | $0.007 | 3,000,000 | $21,000 |
-| 4 | $0.008 | 3,000,000 | $24,000 |
-| 5 | $0.009 | 3,000,000 | $27,000 |
-| 6 | $0.010 | 3,000,000 | $30,000 |
-| 7 | $0.011 | 3,000,000 | $33,000 |
-| 8 | $0.012 | 3,000,000 | $36,000 |
-| 9 | $0.013 | 3,000,000 | $39,000 |
-| 10 | $0.015 | 3,000,000 | $45,000 |
-| **Total** | | **30,000,000** | **$288,000** |
+| Phase     | Price (USD) | Tokens Available | Target Raise |
+| --------- | ----------- | ---------------- | ------------ |
+| 1         | $0.005      | 3,000,000        | $15,000      |
+| 2         | $0.006      | 3,000,000        | $18,000      |
+| 3         | $0.007      | 3,000,000        | $21,000      |
+| 4         | $0.008      | 3,000,000        | $24,000      |
+| 5         | $0.009      | 3,000,000        | $27,000      |
+| 6         | $0.010      | 3,000,000        | $30,000      |
+| 7         | $0.011      | 3,000,000        | $33,000      |
+| 8         | $0.012      | 3,000,000        | $36,000      |
+| 9         | $0.013      | 3,000,000        | $39,000      |
+| 10        | $0.015      | 3,000,000        | $45,000      |
+| **Total** |             | **30,000,000**   | **$288,000** |
 
 ### Implementation Notes
+
 ```solidity
 // Key functions to implement:
 - startPresale()
@@ -363,14 +380,15 @@ describe("VelirionToken", () => {
 
 ### Referral Levels
 
-| Level | Requirements | Purchase Bonus | Staking Bonus | Rewards |
-|-------|--------------|----------------|---------------|---------|
-| 1 | 0 referrals | 5% | 2% | Base rewards |
-| 2 | 10+ referrals | 7% | 3% | Special NFT |
-| 3 | 25+ referrals | 10% | 4% | Exclusive bonuses |
-| 4 | 50+ referrals | 12% | 5% | Private pool access |
+| Level | Requirements  | Purchase Bonus | Staking Bonus | Rewards             |
+| ----- | ------------- | -------------- | ------------- | ------------------- |
+| 1     | 0 referrals   | 5%             | 2%            | Base rewards        |
+| 2     | 10+ referrals | 7%             | 3%            | Special NFT         |
+| 3     | 25+ referrals | 10%            | 4%            | Exclusive bonuses   |
+| 4     | 50+ referrals | 12%            | 5%            | Private pool access |
 
 ### Implementation Structure
+
 ```solidity
 contract VelirionReferral {
     struct Referrer {
@@ -379,11 +397,11 @@ contract VelirionReferral {
         uint256 directReferrals;
         uint256 totalEarned;
     }
-    
+
     mapping(address => address) public referredBy;
     mapping(address => Referrer) public referrers;
     mapping(address => address[]) public referralTree;
-    
+
     // Key functions:
     - register(address referrer)
     - upgradeTier(address user)
@@ -399,18 +417,19 @@ contract VelirionReferral {
 
 ### Staking Tiers
 
-| Tier | APR | Lock Period | Min. Amount | Penalty | Benefits |
-|------|-----|-------------|-------------|---------|----------|
-| **Flexible** | 6% | None | 100 VLR | - | Anytime withdrawal |
-| **Medium** | 12-15% | 90-180 days | 1,000 VLR | 5% | +2% renewal bonus |
-| **Long** | 20-22% | 1 year | 5,000 VLR | 7% | x2 DAO voting weight |
-| **Elite** | 30% | 2 years | 250,000 VLR | 10% | Guardian NFT |
+| Tier         | APR    | Lock Period | Min. Amount | Penalty | Benefits             |
+| ------------ | ------ | ----------- | ----------- | ------- | -------------------- |
+| **Flexible** | 6%     | None        | 100 VLR     | -       | Anytime withdrawal   |
+| **Medium**   | 12-15% | 90-180 days | 1,000 VLR   | 5%      | +2% renewal bonus    |
+| **Long**     | 20-22% | 1 year      | 5,000 VLR   | 7%      | x2 DAO voting weight |
+| **Elite**    | 30%    | 2 years     | 250,000 VLR | 10%     | Guardian NFT         |
 
 ### Implementation
+
 ```solidity
 contract VelirionStaking {
     enum Tier { Flexible, Medium, Long, Elite }
-    
+
     struct Stake {
         uint256 amount;
         uint256 startTime;
@@ -419,9 +438,9 @@ contract VelirionStaking {
         bool renewed;
         uint256 lastClaimTime;
     }
-    
+
     mapping(address => Stake[]) public stakes;
-    
+
     // Key functions:
     - stake(uint256 amount, Tier tier)
     - unstake(uint256 stakeId) // With penalty if early
@@ -436,6 +455,7 @@ contract VelirionStaking {
 ## Milestone 5: DAO + Integration (Days 24-31)
 
 ### DAO Features
+
 - **Burn Proposals**: Monthly & quarterly voting
 - **Treasury Management**: Multisig control (2-of-2)
 - **Voting Weight**: Based on Long/Elite staking
@@ -447,10 +467,12 @@ contract VelirionStaking {
 ### Gnosis Safe Configuration
 
 **Signers**: 2 required
+
 - Founder 1 Address
 - Founder 2 Address
 
 **Wallets to Create**:
+
 1. **DAO Treasury** (2-of-2): 5% of supply
 2. **Marketing Funds** (2-of-2): 15% of supply
 3. **Team Wallet** (2-of-2): 15% with vesting
@@ -463,6 +485,7 @@ contract VelirionStaking {
 ### Testing Checklist
 
 #### Unit Tests
+
 - [ ] Token minting and burning
 - [ ] Presale phase transitions
 - [ ] Antibot mechanisms
@@ -472,6 +495,7 @@ contract VelirionStaking {
 - [ ] DAO voting logic
 
 #### Integration Tests
+
 - [ ] Presale → Referral flow
 - [ ] Presale → Staking flow
 - [ ] Referral → Staking rewards
@@ -479,6 +503,7 @@ contract VelirionStaking {
 - [ ] Multi-token payments
 
 #### Security Tests
+
 - [ ] Reentrancy attacks
 - [ ] Integer overflow/underflow
 - [ ] Access control bypasses
@@ -486,6 +511,7 @@ contract VelirionStaking {
 - [ ] Flash loan attacks
 
 ### Running Tests
+
 ```bash
 # Run all tests
 npx hardhat test
@@ -501,6 +527,7 @@ npx hardhat coverage
 ```
 
 ### Security Audit Checklist
+
 - [ ] OpenZeppelin Contracts used where possible
 - [ ] ReentrancyGuard on all external functions
 - [ ] Input validation on all functions
@@ -515,6 +542,7 @@ npx hardhat coverage
 ## Deployment Guide
 
 ### Pre-Deployment Checklist
+
 - [ ] All tests passing (100% coverage)
 - [ ] Contracts compiled without warnings
 - [ ] Environment variables configured
@@ -525,47 +553,56 @@ npx hardhat coverage
 ### Deployment Sequence
 
 #### Step 1: Deploy Token
+
 ```bash
 npx hardhat run scripts/01_deploy_token.ts --network sepolia
 # Save contract address to .env
 ```
 
 #### Step 2: Deploy Presale
+
 ```bash
 npx hardhat run scripts/02_deploy_presale.ts --network sepolia
 # Requires: VLR token address, USDT, USDC addresses
 ```
 
 #### Step 3: Deploy Referral
+
 ```bash
 npx hardhat run scripts/03_deploy_referral.ts --network sepolia
 # Requires: VLR token, Presale addresses
 ```
 
 #### Step 4: Deploy Staking
+
 ```bash
 npx hardhat run scripts/04_deploy_staking.ts --network sepolia
 # Requires: VLR token, Referral addresses
 ```
 
 #### Step 5: Deploy DAO
+
 ```bash
 npx hardhat run scripts/05_deploy_dao.ts --network sepolia
 # Requires: VLR token, Gnosis Safe address
 ```
 
 #### Step 6: Initialize Contracts
+
 ```bash
 npx hardhat run scripts/06_initialize.ts --network sepolia
 ```
 
 ### Post-Deployment Tasks
+
 1. **Verify Contracts on Etherscan**
+
 ```bash
 npx hardhat verify --network sepolia <CONTRACT_ADDRESS> <CONSTRUCTOR_ARGS>
 ```
 
 2. **Allocate Tokens**
+
 ```typescript
 // Allocate 30% to Presale contract
 await vlrToken.allocate("presale", presaleAddress, parseEther("30000000"));
@@ -578,11 +615,13 @@ await vlrToken.allocate("referral", referralAddress, parseEther("5000000"));
 ```
 
 3. **Configure Multisig Wallets**
+
 - Transfer team tokens to Gnosis Safe
 - Setup 2-of-2 signature requirement
 - Document recovery procedures
 
 4. **Start Presale**
+
 ```typescript
 await presaleContract.startPresale();
 ```
@@ -592,6 +631,7 @@ await presaleContract.startPresale();
 ## Integration Checklist
 
 ### Frontend Integration
+
 - [ ] Connect to wallet (MetaMask, WalletConnect)
 - [ ] Display presale phase and price
 - [ ] Purchase with ETH/USDT/USDC
@@ -601,6 +641,7 @@ await presaleContract.startPresale();
 - [ ] DAO voting interface
 
 ### Backend Requirements
+
 - [ ] Track referral conversions
 - [ ] Monitor presale progress
 - [ ] Calculate staking APRs
@@ -609,12 +650,14 @@ await presaleContract.startPresale();
 - [ ] Update NFT metadata
 
 ### Solana SPL Integration
+
 - [ ] Deploy SPL token program
 - [ ] Implement 0.5% burn on transfer
 - [ ] Bridge mechanism (Ethereum ↔ Solana)
 - [ ] Cross-chain price synchronization
 
 ### API Endpoints Needed
+
 ```
 GET  /api/presale/status
 GET  /api/presale/phase
@@ -630,6 +673,7 @@ POST /api/dao/vote
 ## Appendix
 
 ### Useful Commands
+
 ```bash
 # Compile contracts
 npx hardhat compile
@@ -654,24 +698,26 @@ npx hardhat clean
 ```
 
 ### Contract Addresses (Update After Deployment)
+
 ```
 ## Testnet (Sepolia)
-VLR Token: 
-Presale Contract: 
-Referral Contract: 
-Staking Contract: 
-DAO Contract: 
+VLR Token:
+Presale Contract:
+Referral Contract:
+Staking Contract:
+DAO Contract:
 
 ## Mainnet (Ethereum)
-VLR Token: 
-Presale Contract: 
-Referral Contract: 
-Staking Contract: 
-DAO Contract: 
-Gnosis Safe: 
+VLR Token:
+Presale Contract:
+Referral Contract:
+Staking Contract:
+DAO Contract:
+Gnosis Safe:
 ```
 
 ### Important Links
+
 - **GitHub Repo**: [Link to repository]
 - **Documentation**: [Link to docs]
 - **Audit Report**: [Link when available]
@@ -684,6 +730,7 @@ Gnosis Safe:
 ## Support & Contact
 
 For technical questions or issues during implementation:
+
 - **Email**: dev@velirion.io
 - **Discord**: [Link to developer channel]
 - **Telegram**: [Link to group]
@@ -693,4 +740,3 @@ For technical questions or issues during implementation:
 **Last Updated**: [Current Date]  
 **Document Version**: 1.0  
 **Status**: Ready for Implementation
-

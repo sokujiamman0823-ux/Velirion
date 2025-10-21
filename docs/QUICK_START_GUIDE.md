@@ -1,6 +1,6 @@
 # Velirion Smart Contract - Quick Start Guide
 
-## 🚀 Get Started in 15 Minutes
+## Get Started in 15 Minutes
 
 This guide will help you set up the development environment and deploy your first contract to testnet.
 
@@ -92,33 +92,33 @@ import "@openzeppelin/contracts/security/Pausable.sol";
 
 contract VelirionToken is ERC20, ERC20Burnable, Ownable, Pausable {
     uint256 public constant INITIAL_SUPPLY = 100_000_000 * 10**18;
-    
+
     mapping(string => uint256) public allocationTracking;
-    
+
     event TokensAllocated(string category, address to, uint256 amount);
     event UnsoldBurned(uint256 amount);
-    
+
     constructor() ERC20("Velirion", "VLR") {
         _mint(msg.sender, INITIAL_SUPPLY);
     }
-    
-    function allocate(string memory category, address to, uint256 amount) 
-        external onlyOwner 
+
+    function allocate(string memory category, address to, uint256 amount)
+        external onlyOwner
     {
         require(to != address(0), "Invalid address");
         allocationTracking[category] += amount;
         _transfer(owner(), to, amount);
         emit TokensAllocated(category, to, amount);
     }
-    
+
     function burnUnsold(uint256 amount) external onlyOwner {
         _burn(owner(), amount);
         emit UnsoldBurned(amount);
     }
-    
+
     function pause() external onlyOwner { _pause(); }
     function unpause() external onlyOwner { _unpause(); }
-    
+
     function _beforeTokenTransfer(address from, address to, uint256 amount)
         internal override whenNotPaused
     {
@@ -135,33 +135,37 @@ Create `scripts/01_deploy_token.ts`:
 import { ethers } from "hardhat";
 
 async function main() {
-  console.log("🚀 Deploying Velirion Token...\n");
-  
+  console.log(" Deploying Velirion Token...\n");
+
   const [deployer] = await ethers.getSigners();
   console.log("Deployer:", deployer.address);
-  console.log("Balance:", ethers.formatEther(await ethers.provider.getBalance(deployer.address)), "ETH\n");
-  
+  console.log(
+    "Balance:",
+    ethers.formatEther(await ethers.provider.getBalance(deployer.address)),
+    "ETH\n"
+  );
+
   // Deploy token
   const VelirionToken = await ethers.getContractFactory("VelirionToken");
   console.log("Deploying contract...");
   const token = await VelirionToken.deploy();
   await token.waitForDeployment();
-  
+
   const address = await token.getAddress();
   console.log("✅ VelirionToken deployed to:", address);
-  
+
   // Verify deployment
   const totalSupply = await token.totalSupply();
   const name = await token.name();
   const symbol = await token.symbol();
-  
-  console.log("\n📊 Token Info:");
+
+  console.log("\nToken Info:");
   console.log("Name:", name);
   console.log("Symbol:", symbol);
   console.log("Total Supply:", ethers.formatEther(totalSupply), "VLR");
   console.log("Decimals:", await token.decimals());
-  
-  console.log("\n📝 Next Steps:");
+
+  console.log("\n Next Steps:");
   console.log("1. Add to .env: VLR_TOKEN_ADDRESS=" + address);
   console.log("2. Verify on Etherscan:");
   console.log(`   npx hardhat verify --network sepolia ${address}`);
@@ -191,7 +195,7 @@ describe("VelirionToken", function () {
 
   beforeEach(async function () {
     [owner, addr1, addr2] = await ethers.getSigners();
-    
+
     const VelirionToken = await ethers.getContractFactory("VelirionToken");
     token = await VelirionToken.deploy();
     await token.waitForDeployment();
@@ -213,16 +217,15 @@ describe("VelirionToken", function () {
     it("Should allocate tokens correctly", async function () {
       const amount = ethers.parseEther("1000000");
       await token.allocate("presale", addr1.address, amount);
-      
+
       expect(await token.balanceOf(addr1.address)).to.equal(amount);
       expect(await token.allocationTracking("presale")).to.equal(amount);
     });
 
     it("Should revert if non-owner tries to allocate", async function () {
       const amount = ethers.parseEther("1000");
-      await expect(
-        token.connect(addr1).allocate("test", addr2.address, amount)
-      ).to.be.reverted;
+      await expect(token.connect(addr1).allocate("test", addr2.address, amount))
+        .to.be.reverted;
     });
   });
 
@@ -230,9 +233,9 @@ describe("VelirionToken", function () {
     it("Should burn tokens and reduce supply", async function () {
       const burnAmount = ethers.parseEther("1000000");
       const initialSupply = await token.totalSupply();
-      
+
       await token.burn(burnAmount);
-      
+
       const finalSupply = await token.totalSupply();
       expect(finalSupply).to.equal(initialSupply - burnAmount);
     });
@@ -241,15 +244,16 @@ describe("VelirionToken", function () {
   describe("Pausable", function () {
     it("Should pause and unpause transfers", async function () {
       await token.pause();
-      
-      await expect(
-        token.transfer(addr1.address, ethers.parseEther("100"))
-      ).to.be.reverted;
-      
+
+      await expect(token.transfer(addr1.address, ethers.parseEther("100"))).to
+        .be.reverted;
+
       await token.unpause();
-      
+
       await token.transfer(addr1.address, ethers.parseEther("100"));
-      expect(await token.balanceOf(addr1.address)).to.equal(ethers.parseEther("100"));
+      expect(await token.balanceOf(addr1.address)).to.equal(
+        ethers.parseEther("100")
+      );
     });
   });
 });
@@ -271,6 +275,7 @@ npx hardhat coverage
 ```
 
 Expected output:
+
 ```
   VelirionToken
     Deployment
@@ -319,7 +324,10 @@ npx hardhat console --network sepolia
 
 ```javascript
 // Get contract instance
-const token = await ethers.getContractAt("VelirionToken", "YOUR_CONTRACT_ADDRESS");
+const token = await ethers.getContractAt(
+  "VelirionToken",
+  "YOUR_CONTRACT_ADDRESS"
+);
 
 // Check balance
 const balance = await token.balanceOf("YOUR_ADDRESS");
@@ -338,9 +346,11 @@ await token.allocate("test", "RECIPIENT_ADDRESS", ethers.parseEther("1000"));
 ## Common Issues & Solutions
 
 ### Issue 1: "Insufficient funds" error
+
 **Solution**: Get more testnet ETH from faucet or check you're using correct network.
 
 ### Issue 2: "Nonce too high" error
+
 **Solution**: Reset MetaMask account or use different account.
 
 ```bash
@@ -350,6 +360,7 @@ rm -rf cache artifacts
 ```
 
 ### Issue 3: Compilation errors
+
 **Solution**: Ensure OpenZeppelin version is compatible.
 
 ```bash
@@ -357,6 +368,7 @@ npm install @openzeppelin/contracts@^5.0.0
 ```
 
 ### Issue 4: "Invalid API Key" during verification
+
 **Solution**: Double-check your Etherscan API key in `.env`
 
 ---
