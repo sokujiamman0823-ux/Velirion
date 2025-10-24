@@ -33,6 +33,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IERC1363__factory>;
     getContractFactory(
+      name: "IERC4906",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC4906__factory>;
+    getContractFactory(
       name: "ERC20",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ERC20__factory>;
@@ -53,9 +57,37 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.SafeERC20__factory>;
     getContractFactory(
+      name: "ERC721",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC721__factory>;
+    getContractFactory(
+      name: "ERC721URIStorage",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC721URIStorage__factory>;
+    getContractFactory(
+      name: "IERC721Metadata",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC721Metadata__factory>;
+    getContractFactory(
+      name: "IERC721",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC721__factory>;
+    getContractFactory(
+      name: "IERC721Receiver",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC721Receiver__factory>;
+    getContractFactory(
+      name: "ERC165",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC165__factory>;
+    getContractFactory(
       name: "IERC165",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IERC165__factory>;
+    getContractFactory(
+      name: "SafeCast",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.SafeCast__factory>;
     getContractFactory(
       name: "Pausable",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -64,6 +96,10 @@ declare module "hardhat/types/runtime" {
       name: "ReentrancyGuard",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ReentrancyGuard__factory>;
+    getContractFactory(
+      name: "Strings",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Strings__factory>;
     getContractFactory(
       name: "VelirionReferral",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -81,6 +117,26 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Counter__factory>;
     getContractFactory(
+      name: "VelirionDAO",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.VelirionDAO__factory>;
+    getContractFactory(
+      name: "VelirionTimelock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.VelirionTimelock__factory>;
+    getContractFactory(
+      name: "VelirionTreasury",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.VelirionTreasury__factory>;
+    getContractFactory(
+      name: "IVelirionDAO",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IVelirionDAO__factory>;
+    getContractFactory(
+      name: "IVelirionNFT",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IVelirionNFT__factory>;
+    getContractFactory(
       name: "IVelirionReferral",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IVelirionReferral__factory>;
@@ -92,6 +148,14 @@ declare module "hardhat/types/runtime" {
       name: "MockERC20",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.MockERC20__factory>;
+    getContractFactory(
+      name: "VelirionGuardianNFT",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.VelirionGuardianNFT__factory>;
+    getContractFactory(
+      name: "VelirionReferralNFT",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.VelirionReferralNFT__factory>;
     getContractFactory(
       name: "VelirionPresaleV2",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -123,6 +187,11 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.IERC1363>;
     getContractAt(
+      name: "IERC4906",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC4906>;
+    getContractAt(
       name: "ERC20",
       address: string,
       signer?: ethers.Signer
@@ -148,10 +217,45 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.SafeERC20>;
     getContractAt(
+      name: "ERC721",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC721>;
+    getContractAt(
+      name: "ERC721URIStorage",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC721URIStorage>;
+    getContractAt(
+      name: "IERC721Metadata",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC721Metadata>;
+    getContractAt(
+      name: "IERC721",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC721>;
+    getContractAt(
+      name: "IERC721Receiver",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC721Receiver>;
+    getContractAt(
+      name: "ERC165",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC165>;
+    getContractAt(
       name: "IERC165",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.IERC165>;
+    getContractAt(
+      name: "SafeCast",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.SafeCast>;
     getContractAt(
       name: "Pausable",
       address: string,
@@ -162,6 +266,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.ReentrancyGuard>;
+    getContractAt(
+      name: "Strings",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Strings>;
     getContractAt(
       name: "VelirionReferral",
       address: string,
@@ -183,6 +292,31 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.Counter>;
     getContractAt(
+      name: "VelirionDAO",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.VelirionDAO>;
+    getContractAt(
+      name: "VelirionTimelock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.VelirionTimelock>;
+    getContractAt(
+      name: "VelirionTreasury",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.VelirionTreasury>;
+    getContractAt(
+      name: "IVelirionDAO",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IVelirionDAO>;
+    getContractAt(
+      name: "IVelirionNFT",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IVelirionNFT>;
+    getContractAt(
       name: "IVelirionReferral",
       address: string,
       signer?: ethers.Signer
@@ -197,6 +331,16 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.MockERC20>;
+    getContractAt(
+      name: "VelirionGuardianNFT",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.VelirionGuardianNFT>;
+    getContractAt(
+      name: "VelirionReferralNFT",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.VelirionReferralNFT>;
     getContractAt(
       name: "VelirionPresaleV2",
       address: string,

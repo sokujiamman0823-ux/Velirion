@@ -1,7 +1,7 @@
 use anchor_lang::prelude::*;
 use anchor_spl::token::{self, Burn, Mint, MintTo, Token, TokenAccount, Transfer};
 
-declare_id!("VLRxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+declare_id!("CXf7sapvuMh9oK4D9HcSJDHqTjoo5yK1LsppTXeXMHzn");
 
 /// Velirion SPL Token Program
 /// Implements a deflationary token with 0.5% automatic burn on transfers

@@ -2,7 +2,9 @@
 /* tslint:disable */
 /* eslint-disable */
 export * as core from "./core";
+export * as governance from "./governance";
 export * as interfaces from "./interfaces";
 export * as mocks from "./mocks";
+export * as nft from "./nft";
 export * as presale from "./presale";
 export { Counter__factory } from "./Counter__factory";
