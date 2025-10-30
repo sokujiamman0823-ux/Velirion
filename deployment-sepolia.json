@@ -1,0 +1,23 @@
+{
+  "network": "sepolia",
+  "timestamp": "2025-10-28T20:08:14.483Z",
+  "deployer": "0xdB84e27b7CaFb453298057Bcf6B7cd97fc988e62",
+  "contracts": {
+    "vlrToken": "0x4cC6C5a87db2035Ce3c64953e263D3153283BfD9",
+    "presale": "0xAF8021201524b1E487350F48D5609dFE7ecBb529",
+    "usdt": "0x96f7e7bDc6d2403e5FeEa154591566469c6aCA13",
+    "usdc": "0xF036E0Ce0f69C3ff6660C240619872f923e58ebc",
+    "referral": "0xAd126Bfd9F1781085E15cF9Fd0405A371Fd22FD8",
+    "staking": "0xA4F6E47A2d3a4B0f330C04fCb9c9D4B34A66232F",
+    "timelock": "0x705705Dcb1012BE25c6022E47CA3Fb1AB4F610EF",
+    "dao": "0x498Da63aC742DaDA798D9cBfcC2DF192E8B4A3FE",
+    "treasury": "0x1A462637f6eCAbe092C59F32be81700ddF2ea5A1",
+    "referralNFT": "0x11aC4D9569a4F51C3c00529931b54d55335cE3b4",
+    "guardianNFT": "0x0baF2aca6044dCb120034E278Ba651F048658C19"
+  },
+  "wallets": {
+    "marketing": "0xdB84e27b7CaFb453298057Bcf6B7cd97fc988e62",
+    "team": "0xdB84e27b7CaFb453298057Bcf6B7cd97fc988e62",
+    "liquidity": "0xdB84e27b7CaFb453298057Bcf6B7cd97fc988e62"
+  }
+}

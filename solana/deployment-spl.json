@@ -1,0 +1,10 @@
+{
+  "network": "devnet",
+  "programId": "CehR3hndPUMTtLJe2hzQo9Hu538KTb2TdbjPugVP72Tr",
+  "mintAddress": "CFfZ1KGxiywpSzuU1VizsxVDh8Efrb2hTyVZZvFjgyXM",
+  "mintAuthority": "JCoP8cPACMY6aj4fYybZ6e6vLfHi2WSzsGaY98UMLskX",
+  "decimals": 9,
+  "deployer": "JCoP8cPACMY6aj4fYybZ6e6vLfHi2WSzsGaY98UMLskX",
+  "timestamp": "2025-10-30T07:50:00.000Z",
+  "transactionSignature": "5grzyvGxBDscrdUSEpF41xU1xKnGoVXGoGQTcXaRgZy7M1ELUZX2RE81UThi3obarrwRN7WGLkL7AzsMkwBbzaK4"
+}

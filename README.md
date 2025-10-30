@@ -21,10 +21,13 @@ All 5 milestones successfully delivered ahead of schedule:
 
 ## 📚 Quick Links
 
+- **[Quick Reference](QUICK_REFERENCE.md)** - ⚡ Fast lookup for addresses, tiers, commands
+- **[Compliance Summary](COMPLIANCE_SUMMARY.md)** - ✅ Full compliance report
+- **[Backend Integration](BACKEND_INTEGRATION.md)** - 🔌 Complete integration guide
 - **[Project Progress](PROJECT_PROGRESS.md)** - Detailed milestone breakdown
-- **[Milestone 5 Complete](MILESTONE_5_COMPLETE.md)** - Final milestone summary
-- **[Client Requirements](docs/milestone%205/CLIENT_REQUIREMENTS_CHECKLIST.md)** - Deployment checklist
-- **[Testing Guide](docs/milestone%205/TESTING_GUIDE.md)** - How to run tests
+- **[Deployment Summary](DEPLOYMENT_SUMMARY.md)** - Contract details and addresses
+- **[Testing Guide](TESTING_GUIDE.md)** - How to run tests
+- **[Solana Deployment](SOLANA_DEPLOYMENT.md)** - Solana devnet deployment guide
 
 ---
 
@@ -233,17 +236,17 @@ This deploys all 10 contracts and configures integrations automatically.
 ## 📖 Documentation
 
 ### For Developers
-- [Implementation Guide](docs/VELIRION_IMPLEMENTATION_GUIDE.md)
-- [Deployment Guide](docs/DEPLOYMENT_GUIDE.md)
-- [Testing Guide](docs/milestone%205/TESTING_GUIDE.md)
+- [Testing Guide](TESTING_GUIDE.md)
+- [Verification Guide](QUICK_VERIFY.md)
+- [Deployment Scripts](scripts/)
 
 ### For Users
 - [Project Progress](PROJECT_PROGRESS.md)
-- [Milestone Summaries](docs/)
+- [Next Steps](NEXT_STEPS.md)
 
 ### For Deployment
-- [Client Requirements](docs/milestone%205/CLIENT_REQUIREMENTS_CHECKLIST.md)
-- [Deployment Scripts](scripts/)
+- [Deployment Summary](DEPLOYMENT_SUMMARY.md)
+- Addresses JSON: `deployment-sepolia.json`
 
 ---
 

@@ -63,9 +63,6 @@ async function main() {
         mint: mint.publicKey,
         mintAuthority: mintAuthority,
         payer: provider.wallet.publicKey,
-        systemProgram: anchor.web3.SystemProgram.programId,
-        tokenProgram: TOKEN_PROGRAM_ID,
-        rent: anchor.web3.SYSVAR_RENT_PUBKEY,
       })
       .signers([mint])
       .rpc();

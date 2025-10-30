@@ -4,7 +4,7 @@
 
 ### Versions
 
-- **Anchor CLI**: 0.32.1 (installed globally)
+- **Anchor CLI**: 0.30.1 (installed globally)
 - **Anchor Framework**: 0.30.1 (in Cargo.toml)
 - **Solana CLI**: 2.3.13
 - **Node.js**: v24.10.0
@@ -105,9 +105,9 @@ anchor build
 - Ensure you're working from `~/velirion-sc/` not `/mnt/e/`
 - Check internet connection: `ping index.crates.io`
 
-### Version Mismatch Warning
+### Version Pinning
 
-This is OK! CLI 0.32.1 works fine with framework 0.30.1.
+Both CLI and framework are pinned to 0.30.1.
 
 ### Tests Fail with "Connection Refused"
 
@@ -148,7 +148,7 @@ solana program show CXf7sapvuMh9oK4D9HcSJDHqTjoo5yK1LsppTXeXMHzn --url devnet
 
 ## 📝 Notes
 
-- **Why mixed versions?** Anchor 0.32.1 has dependency conflicts, so we use CLI 0.32.1 with framework 0.30.1
+- **Anchor version**: Use CLI 0.30.1 to match framework 0.30.1
 - **Why Linux filesystem?** 10-100x faster compilation than Windows filesystem via WSL
 - **Why skip local validator?** Your CPU doesn't support AVX2 required by solana-test-validator
 
